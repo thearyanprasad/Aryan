@@ -13,32 +13,16 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=35">
     <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Calendly link and widget resources -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 
 <body>
-    <svg style="display: none;">
-        <filter id="handDrawnNoise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <filter id="handDrawnNoise2">
-            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <filter id="handDrawnNoiset">
-            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-        <filter id="handDrawnNoiset2">
-            <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
-
     <div class="gradient-bg"></div>
 
     <header>
-        <a href="#home" class="logo" aria-label="Aryan Prasad Portfolio Home">Portfolio</a>
+        <a href="#home" class="logo" aria-label="Aryan Prasad Portfolio Home">Aryan<span class="italic">Prasad</span><span class="dot">.</span></a>
         <nav id="nav-list">
             <ul>
                 <li><a href="#home" class="active">Home</a></li>
@@ -88,9 +72,8 @@
                 </div>
 
                 <div class="specialization reveal fade-up" style="--delay: 0.3s">
-                    Focused on Data Analytics, Power BI, SQL, Python, <br>
-                    and transforming raw data into business insights.
-
+                    BCA Student & Analytics Intern.<br>
+                    Writing clean <span class="specialization-highlight">SQL</span>, designing <span class="specialization-highlight">Power BI</span> dashboards, and turning complex metrics into simple business stories.
                 </div>
             </div>
 
@@ -101,7 +84,7 @@
 
             <div class="hero-bottom">
                 <p class="left-text">
-                    I AM<br>ARYAN
+                    HI,<br>I AM<br>ARYAN
                 </p>
                 <p class="right-text">
                     DATA<br>ANALYST
@@ -112,18 +95,13 @@
         <!-- ABOUT SECTION -->
         <section id="about" class="about section-padding reveal fade-up">
             <div class="section-container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <p class="large-text">Hi, I’m Aryan, an aspiring Data Analyst and a BCA student at IGNOU
-                        (Expected 2027). I enjoy analyzing data, uncovering insights, and building dashboards that
-                        support better decision-making.
+                <div class="about-glass-panel">
+                    <h2 class="about-section-title">About Me</h2>
+                    <p class="large-text">
+                        <span class="about-lead">Hi, I’m Aryan,</span> an aspiring Data Analyst and a BCA student at IGNOU (Expected 2027). I enjoy analyzing data, uncovering insights, and building dashboards that support better decision-making.
                         <br><br>
-                        Skilled in SQL, Python, MySQL, Power BI, and Excel, I’m constantly learning and exploring new
-                        areas of data analytics and business intelligence.
-
-
+                        Skilled in <span class="about-highlight">SQL</span>, <span class="about-highlight">Python</span>, <span class="about-highlight">MySQL</span>, <span class="about-highlight">Power BI</span>, and <span class="about-highlight">Excel</span>, I’m constantly learning and exploring new areas of data analytics and business intelligence.
                     </p>
-
                 </div>
             </div>
         </section>
@@ -156,6 +134,21 @@
                     <div class="skill-item" data-category="languages">
                         <img src="sqlite.svg" alt="SQL" aria-hidden="true">
                         <span>SQL</span>
+                    </div>
+                    <div class="skill-item" data-category="languages">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg"
+                            alt="C" aria-hidden="true">
+                        <span>C</span>
+                    </div>
+                    <div class="skill-item" data-category="languages">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+                            alt="HTML5" aria-hidden="true">
+                        <span>HTML5</span>
+                    </div>
+                    <div class="skill-item" data-category="languages">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
+                            alt="CSS3" aria-hidden="true">
+                        <span>CSS3</span>
                     </div>
 
                     <!-- Analytics & BI -->
@@ -212,7 +205,7 @@
                             <h3 class="exp-col-title">Journey Highlights</h3>
                             <div class="stat-cards-grid">
                                 <!-- Card 1 -->
-                                <div class="stat-card">
+                                <div class="stat-card reveal fade-up" style="--delay: 0.1s">
                                     <div class="stat-icon">
                                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -225,7 +218,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 2 -->
-                                <div class="stat-card">
+                                <div class="stat-card reveal fade-up" style="--delay: 0.2s">
                                     <div class="stat-icon">
                                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -239,7 +232,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 3 -->
-                                <div class="stat-card">
+                                <div class="stat-card reveal fade-up" style="--delay: 0.3s">
                                     <div class="stat-icon">
                                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -255,7 +248,7 @@
                                     </div>
                                 </div>
                                 <!-- Card 4 (Resume) -->
-                                <a href="aryan_resume.pdf" target="_blank" class="stat-card resume-card">
+                                <a href="aryan_resume.pdf" target="_blank" class="stat-card resume-card reveal fade-up" style="--delay: 0.4s">
                                     <div class="stat-icon">
                                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -277,40 +270,43 @@
                             <h3 class="exp-col-title">Education Timeline</h3>
                             <div class="timeline-container">
                                 <div class="timeline-line"></div>
-
-                                <div class="timeline-item">
+                                <div class="timeline-item reveal fade-up" style="--delay: 0.1s">
                                     <div class="timeline-dot"></div>
                                     <div class="timeline-content">
                                         <span class="timeline-year">2021</span>
                                         <h4>CBSE 10th Class</h4>
-                                        <p>Score: 83%</p>
+                                        <p class="timeline-score">Score: 83%</p>
+                                        <p class="timeline-desc">Secured high grades in Mathematics & Science, building a foundation in logical analysis.</p>
                                     </div>
                                 </div>
 
-                                <div class="timeline-item">
+                                <div class="timeline-item reveal fade-up" style="--delay: 0.2s">
                                     <div class="timeline-dot"></div>
                                     <div class="timeline-content">
                                         <span class="timeline-year">2023</span>
                                         <h4>CBSE 12th Class</h4>
-                                        <p>Score: 79%</p>
+                                        <p class="timeline-score">Score: 79%</p>
+                                        <p class="timeline-desc">Completed Science stream (Physics, Chemistry, Math, Computer Science) with a focus on data foundations.</p>
                                     </div>
                                 </div>
 
-                                <div class="timeline-item">
+                                <div class="timeline-item reveal fade-up" style="--delay: 0.3s">
                                     <div class="timeline-dot glow"></div>
                                     <div class="timeline-content">
                                         <span class="timeline-year accent">2024 - 2027</span>
-                                        <h4>IGNOU</h4>
-                                        <p>Bachelor of Computer Applications (BCA)</p>
+                                        <h4>Bachelor of Computer Applications (BCA)</h4>
+                                        <p class="timeline-score">IGNOU | Graduation expected: 2027</p>
+                                        <p class="timeline-desc">Focusing on Database Management Systems, computer science fundamentals, and programming methods.</p>
                                     </div>
                                 </div>
 
-                                <div class="timeline-item current">
+                                <div class="timeline-item current reveal fade-up" style="--delay: 0.4s">
                                     <div class="timeline-dot pulse-dot"></div>
                                     <div class="timeline-content">
                                         <span class="timeline-year accent">Current Focus</span>
-                                        <p class="focus-text">Data Analytics Internship at Eagletfly
-                                            Solutions<br>Advanced Business Intelligence & Database queries</p>
+                                        <h4>Data Analytics Internship</h4>
+                                        <p class="timeline-score">Eagletfly Solutions</p>
+                                        <p class="timeline-desc">Designing interactive business intelligence dashboards, automating custom SQL queries, and translating raw data into actionable insights.</p>
                                     </div>
                                 </div>
                             </div>
@@ -425,33 +421,108 @@
         <!-- CONTACT SECTION -->
         <section id="contact" class="contact reveal fade-up">
             <div class="section-container">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="large-text">Learning, building, and improving every day as a developer.
-                    Open to connecting, collaborating, and working on meaningful ideas.</p>
-                <div class="contact-links">
-                    <a href="#contact-modal" class="big-link open-contact-btn">prasadaryan.work@gmail.com</a>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/prasadaryan9354" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="28" height="28" fill="#0077B5">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                <div class="contact-grid">
+                    <!-- Left Column: Info & Links -->
+                    <div class="contact-info-panel">
+                        <div class="contact-text-block">
+                            <h2 class="section-title" style="margin-bottom: 1.5rem;">Let's Connect</h2>
+                            <p class="large-text">
+                                Whether you have an internship opportunity, a project to collaborate on, or just want to chat about data analytics and business intelligence, my inbox is always open.
+                            </p>
+                        </div>
+                        
+                        <div class="email-card">
+                            <div class="email-details">
+                                <span class="email-label">DROP A LINE</span>
+                                <a href="mailto:prasadaryan.work@gmail.com" class="email-address-link">prasadaryan.work@gmail.com</a>
+                            </div>
+                            <button class="copy-email-btn" aria-label="Copy email address" data-email="prasadaryan.work@gmail.com">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="copy-icon">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="check-icon" style="display: none;">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span class="tooltip">Copy</span>
+                        </div>
+                        
+                        <div class="social-pills-container">
+                            <span class="social-pills-title">FIND ME ON</span>
+                            <div class="social-pills">
+                                <a href="https://www.linkedin.com/in/prasadaryan9354" target="_blank" rel="noopener noreferrer" class="social-pill linkedin">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://github.com/thearyanprasad" target="_blank" rel="noopener noreferrer" class="social-pill github">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                                    </svg>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://www.instagram.com/madmello_aryan/" target="_blank" rel="noopener noreferrer" class="social-pill instagram">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                    <span>Instagram</span>
+                                </a>
+                                <a href="#" class="social-pill calendly" id="calendly-btn">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span>Calendly</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Direct Message Form Card -->
+                    <div class="contact-form-card">
+                        <h3 class="form-card-title">Send a Message</h3>
+                        <form class="contact-form" id="contact-form">
+                            <!-- Hidden fields for custom subjects and categories in Web3Forms -->
+                            <input type="hidden" name="subject" id="email-subject" value="Portfolio Message - General Chat">
+                            <input type="hidden" name="category" id="email-category" value="chat">
+
+                            <div class="topic-chips-container">
+                                <span class="topic-chips-title">I'M LOOKING TO</span>
+                                <div class="topic-chips">
+                                    <button type="button" class="topic-chip active" data-category="chat" data-subject="Portfolio Message - General Chat" data-label="Your Message">💬 Just Chat</button>
+                                    <button type="button" class="topic-chip" data-category="job" data-subject="Portfolio Message - Internship Opportunity" data-label="Opportunity Details">💼 Hire Me</button>
+                                    <button type="button" class="topic-chip" data-category="collab" data-subject="Portfolio Message - Project Collab" data-label="Collaboration Idea">🚀 Collaborate</button>
+                                </div>
+                            </div>
+
+                            <div class="floating-group">
+                                <input type="text" id="contact-name" name="name" required placeholder=" ">
+                                <label for="contact-name">Your Name</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="email" id="contact-email" name="email" required placeholder=" ">
+                                <label for="contact-email">Your Email</label>
+                            </div>
+                            <div class="floating-group">
+                                <textarea id="contact-message" name="message" required placeholder=" " rows="5"></textarea>
+                                <label for="contact-message" id="message-label">Your Message</label>
+                            </div>
+                            <button type="submit" class="contact-btn submit-btn">Send Message</button>
+                        </form>
+                        
+                        <!-- Success Message inside card (Hidden by default) -->
+                        <div id="success-message" style="display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 0;">
+                            <svg viewBox="0 0 24 24" width="64" height="64" stroke="#ff7a00" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1.5rem;">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
                             </svg>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://github.com/thearyanprasad" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-                                <path
-                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                            </svg>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.instagram.com/madmello_aryan/" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" width="28" height="28" fill="#E4405F">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
-                            <span>Instagram</span>
-                        </a>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text-color);">Message Sent!</h3>
+                            <p style="color: var(--text-color-light); font-size: 1.1rem; margin-bottom: 1.5rem;">Thank you for reaching out. I'll get back to you soon.</p>
+                            <button type="button" class="reset-form-btn" id="reset-form-btn">Send Another Message</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -462,143 +533,119 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
-    <!-- Contact Modal -->
-    <div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-box">
-            <div class="modal-header" id="modal-header">
-                <h2 id="modal-title">Send a Message</h2>
-                <button class="close-modal" aria-label="Close Modal">&times;</button>
-            </div>
-
-            <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4" required placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" class="contact-btn submit-btn">Send Message</button>
-            </form>
-
-            <!-- Success Message (Hidden by default) -->
-            <div id="success-message"
-                style="display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem 0;">
-                <svg viewBox="0 0 24 24" width="64" height="64" stroke="#4CAF50" stroke-width="2" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1.5rem;">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text-color);">Message Sent!</h3>
-                <p style="color: var(--text-color-light); font-size: 1.1rem;">Thank you for reaching out. I'll get back
-                    to you soon.</p>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
     <script>
-        // Modal Logic
-        const contactModal = document.getElementById('contact-modal');
-        const openModalBtns = document.querySelectorAll('.open-contact-btn');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const contactForm = document.getElementById('contact-form');
-        const modalHeader = document.getElementById('modal-header');
-        const successMessage = document.getElementById('success-message');
-
-        // Function to reset the modal to its original state
-        const resetModal = () => {
-            contactForm.reset();
-            contactForm.style.display = 'flex';
-            modalHeader.style.display = 'flex';
-            successMessage.style.display = 'none';
-        };
-
-        openModalBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                contactModal.classList.add('active');
+        // Copy to Clipboard Logic
+        const copyEmailBtn = document.querySelector('.copy-email-btn');
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', () => {
+                const email = copyEmailBtn.getAttribute('data-email');
+                const copyIcon = copyEmailBtn.querySelector('.copy-icon');
+                const checkIcon = copyEmailBtn.querySelector('.check-icon');
+                const tooltip = copyEmailBtn.querySelector('.tooltip');
+                
+                navigator.clipboard.writeText(email).then(() => {
+                    // Update visual state
+                    tooltip.textContent = 'Copied!';
+                    copyIcon.style.display = 'none';
+                    checkIcon.style.display = 'block';
+                    copyEmailBtn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        tooltip.textContent = 'Copy';
+                        copyIcon.style.display = 'block';
+                        checkIcon.style.display = 'none';
+                        copyEmailBtn.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Could not copy email: ', err);
+                });
             });
-        });
+        }
 
-        const closeModal = () => {
-            contactModal.classList.remove('active');
-            // Wait for fade out transition before resetting
-            setTimeout(resetModal, 300);
-        };
+        // Contact Form Submission logic (Web3Forms API)
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const resetFormBtn = document.getElementById('reset-form-btn');
+        const formTitle = document.querySelector('.form-card-title');
 
-        closeModalBtn.addEventListener('click', closeModal);
+        if (contactForm && successMessage) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-        // Close on outside click
-        contactModal.addEventListener('click', (e) => {
-            if (e.target === contactModal) {
-                closeModal();
-            }
-        });
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
 
-        // Handle form submission with custom success UI and Web3Forms API
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+                // Web3Forms Access Key
+                const accessKey = "32eed7e8-c28c-42eb-bc0a-7a1d841fda9b";
 
-            const submitBtn = contactForm.querySelector('.submit-btn');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
+                const formData = {
+                    access_key: accessKey,
+                    subject: document.getElementById('email-subject').value,
+                    category: document.getElementById('email-category').value,
+                    name: document.getElementById('contact-name').value,
+                    email: document.getElementById('contact-email').value,
+                    message: document.getElementById('contact-message').value
+                };
 
-            // ENTER YOUR ACCESS KEY BELOW (Get your free key instantly from web3forms.com)
-            const accessKey = "32eed7e8-c28c-42eb-bc0a-7a1d841fda9b";
-
-            const formData = {
-                access_key: accessKey,
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            // Send to Web3Forms via AJAX
-            fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
+                fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Hide the form and header
+                        // Hide the form and form title
                         contactForm.style.display = 'none';
-                        modalHeader.style.display = 'none';
+                        if (formTitle) formTitle.style.display = 'none';
 
-                        // Show the success message with a smooth fade
+                        // Show success message with a smooth fade
                         successMessage.style.display = 'flex';
                         successMessage.style.opacity = 0;
                         setTimeout(() => successMessage.style.opacity = 1, 10);
-
-                        // Automatically close the modal after 2.5 seconds
-                        setTimeout(() => {
-                            closeModal();
-                        }, 2500);
                     } else {
                         throw new Error(data.message || "Failed to submit form");
                     }
                 })
                 .catch(error => {
                     console.error("Submission Error:", error);
-                    alert("Please add your Web3Forms Access Key to the code, or check your internet connection.");
+                    alert("Submission failed. Please check your internet connection or try again.");
                 })
                 .finally(() => {
-                    // Reset button state
                     submitBtn.textContent = originalBtnText;
                     submitBtn.disabled = false;
                 });
-        });
+            });
+
+            // Reset form button handler
+            if (resetFormBtn) {
+                resetFormBtn.addEventListener('click', () => {
+                    contactForm.reset();
+                    contactForm.style.display = 'flex';
+                    if (formTitle) formTitle.style.display = 'block';
+                    successMessage.style.display = 'none';
+                });
+            }
+        }
+
+        // Calendly Popup trigger
+        const calendlyBtn = document.getElementById('calendly-btn');
+        if (calendlyBtn) {
+            calendlyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (typeof Calendly !== 'undefined') {
+                    Calendly.initPopupWidget({ url: 'https://calendly.com/prasadaryan-work' });
+                } else {
+                    window.open('https://calendly.com/prasadaryan-work', '_blank');
+                }
+            });
+        }
     </script>
 </body>
 

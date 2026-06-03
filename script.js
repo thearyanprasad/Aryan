@@ -41,12 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.closest('a, button, input, textarea, .availability-badge, .skill-item, .stat-card')) {
                 document.body.classList.add('cursor-hover');
             }
+            if (e.target.closest('p, h1, h2, h3, span, li, td, th') && !e.target.closest('a, button, .skill-item, .stat-card, .theme-toggle, .menu-toggle')) {
+                document.body.classList.add('cursor-text');
+            }
         });
 
         document.addEventListener('mouseout', (e) => {
             if (e.target.closest('a, button, input, textarea, .availability-badge, .skill-item, .stat-card')) {
                 document.body.classList.remove('cursor-hover');
             }
+            if (e.target.closest('p, h1, h2, h3, span, li, td, th')) {
+                document.body.classList.remove('cursor-text');
+            }
+        });
+
+        // Click active feedback
+        document.addEventListener('mousedown', () => {
+            document.body.classList.add('cursor-active');
+        });
+
+        document.addEventListener('mouseup', () => {
+            document.body.classList.remove('cursor-active');
         });
     } else {
         // Hide cursor elements completely on touch devices
@@ -271,5 +286,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 250); // Match style.css exit transition duration (0.25s)
             });
         });
+    }
+
+    // Scroll state header
+    const header = document.querySelector('header');
+    if (header) {
+        const toggleHeaderScrolled = () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+        window.addEventListener('scroll', toggleHeaderScrolled);
+        toggleHeaderScrolled(); // Run initially
+    }
+
+    // 8. Contact Topic Chips Selection
+    const topicChips = document.querySelectorAll('.topic-chip');
+    const emailSubject = document.getElementById('email-subject');
+    const emailCategory = document.getElementById('email-category');
+    const messageLabel = document.getElementById('message-label');
+
+    if (topicChips.length > 0) {
+        topicChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Toggle active state
+                topicChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+
+                // Update hidden inputs
+                const category = chip.getAttribute('data-category');
+                const subject = chip.getAttribute('data-subject');
+                if (emailSubject) emailSubject.value = subject;
+                if (emailCategory) emailCategory.value = category;
+
+                // Update message label contextually
+                const label = chip.getAttribute('data-label');
+                if (messageLabel && label) {
+                    messageLabel.textContent = label;
+                }
+            });
+        });
+        
+        // Trigger initial active state setup for accessibility/focus placeholders
+        const activeChip = document.querySelector('.topic-chip.active');
+        if (activeChip) {
+            const label = activeChip.getAttribute('data-label');
+            if (messageLabel && label) messageLabel.textContent = label;
+        }
     }
 });
