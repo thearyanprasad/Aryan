@@ -441,6 +441,7 @@ main {
     gap: 1.2rem;
     pointer-events: auto;
     flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
 .resume-btn-hero {
