@@ -76,6 +76,7 @@ body.has-custom-cursor * {
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 
@@ -112,12 +113,14 @@ ul {
     list-style: none;
 }
 
+.mobile-only {
+    display: none;
+}
+
 /* Background Gradient - Fixed behind everything */
 .gradient-bg {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
@@ -1437,7 +1440,7 @@ body.dark-mode .stat-card {
         position: fixed;
         top: -100dvh;
         left: 0;
-        width: 100vw;
+        width: 100%;
         height: 100dvh;
         background: var(--bg-overlay);
         backdrop-filter: blur(24px);
@@ -1448,6 +1451,14 @@ body.dark-mode .stat-card {
         visibility: hidden;
         transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
         z-index: 99;
+    }
+
+    .contact-btn {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
     }
 
     nav.open {
@@ -2377,12 +2388,22 @@ body.dark-mode .topic-chip.active {
         border-radius: 20px;
     }
     
+    .email-card {
+        min-width: 0;
+        width: 100%;
+        padding: 1rem 1.2rem;
+    }
+    
     .social-pills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 0.6rem;
+        width: 100%;
     }
     
     .social-pill {
-        padding: 0.6rem 1.1rem;
-        font-size: 0.85rem;
+        justify-content: center;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
     }
 }
