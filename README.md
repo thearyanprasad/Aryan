@@ -81,6 +81,18 @@ This portfolio website is not just a showcase of my projects, but is itself a de
 
 ---
 
+### 4. IBM HR Analytics Dashboard — Human Resources Domain
+> **Workforce Attrition Modeling:** Developed an interactive dashboard tracking attrition factors using a dataset of employee profiles.
+*   **Key Accomplishment:** Built a multi-page Power BI dashboard modeling workforce metrics, revealing that overtime workers represent **53.6% of attrition**, enabling HR to preemptively target high-turnover brackets.
+*   **Tech Stack:** `Power BI`, `DAX`, `Data Modeling`, `Data Visualization`, `HR Analytics`
+*   **Project Link:** [View IBM HR Analytics Dashboard Repository](https://github.com/thearyanprasad/IBM-HR-Analytics-Dashboard)
+
+<p align="center">
+  <img src="ibm_hr_1.png" alt="IBM HR Analytics Dashboard Screenshot" width="85%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+</p>
+
+---
+
 ## 🎓 Education & Professional Journey
 
 *   💼 **Data Analytics Industrial Intern** | Eagletfly Solutions Pvt Ltd  *(Jan 2026 – Jun 2026)*
