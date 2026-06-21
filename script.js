@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let mouseX = 0, mouseY = 0;
 
         const updateCursor = () => {
-            posX += (mouseX - posX) * 0.15;
-            posY += (mouseY - posY) * 0.15;
+            posX += (mouseX - posX) * 0.08;
+            posY += (mouseY - posY) * 0.08;
 
             follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
             cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;

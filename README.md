@@ -45,15 +45,16 @@ This portfolio website is not just a showcase of my projects, but is itself a de
 
 ## 📈 Selected Case Studies & Analytics Works
 
-### 1. LV Analytics Dashboard — Retail Domain
-> **Business Value:** Addressed quarterly performance metrics to highlight underperforming products and pinpoint key leakage vectors.
-*   **Key Accomplishment:** Developed an interactive BI dashboard tracking **15+ retail KPIs** utilizing advanced **DAX modeling** and user-experience patterns, highlighting a **12% revenue leakage** in sales.
-*   **Tech Stack:** `Power BI`, `DAX`, `Data Storytelling`, `KPI Analysis`
-*   **Project Link:** [View LV Dashboard Repository](https://github.com/thearyanprasad/LV-Analytics-Dashboard)
+### 1. Customer Churn Analysis — Telecom Domain
+> **Business Value:** Outlined predictive retention strategies to curb customer loss, improve onboarding tenure, and reduce unquantified monthly revenue loss.
+*   **Key Accomplishment:** Developed an interactive Power BI dashboard and analyzed over **7,032 customer profiles** using SQL, Python, and DAX to pinpoint key churn indicators, identifying a **26.58% churn rate** and **$139.13K in monthly revenue lost**.
+*   **Tech Stack:** `Power BI`, `SQL`, `Python`, `DAX`, `Predictive Analytics`, `EDA`
+*   **Project Link:** [View Customer Churn Analysis Repository](https://github.com/thearyanprasad/customer-churn-analysis)
 
 <p align="center">
-  <img src="lv_dashboard.png" alt="LV Analytics Dashboard Screenshot" width="85%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <img src="customer_churn_dashboard.png" alt="Customer Churn Analysis Screenshot" width="85%" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
 </p>
+
 
 ---
 
