@@ -27,10 +27,10 @@
         <nav id="nav-list">
             <ul>
                 <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#works">Work</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#journey">Journey</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#works">Work</a></li>
                 <li class="mobile-only"><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -699,8 +699,7 @@
                 const checkIcon = copyEmailBtn.querySelector('.check-icon');
                 const tooltip = copyEmailBtn.querySelector('.tooltip');
 
-                navigator.clipboard.writeText(email).then(() => {
-                    // Update visual state
+                const showSuccess = () => {
                     tooltip.textContent = 'Copied!';
                     copyIcon.style.display = 'none';
                     checkIcon.style.display = 'block';
@@ -712,9 +711,38 @@
                         checkIcon.style.display = 'none';
                         copyEmailBtn.classList.remove('copied');
                     }, 2000);
-                }).catch(err => {
-                    console.error('Could not copy email: ', err);
-                });
+                };
+
+                const fallbackCopy = (text) => {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "absolute";
+                    textArea.style.left = "-9999px";
+                    textArea.style.top = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        if (successful) {
+                            showSuccess();
+                        } else {
+                            console.error('Fallback: Copy command was unsuccessful');
+                        }
+                    } catch (err) {
+                        document.body.removeChild(textArea);
+                        console.error('Fallback: Oops, unable to copy', err);
+                    }
+                };
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(email)
+                        .then(showSuccess)
+                        .catch(() => fallbackCopy(email));
+                } else {
+                    fallbackCopy(email);
+                }
             });
         }
 

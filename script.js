@@ -179,27 +179,37 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSectionId = '';
         
         sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 300 && rect.bottom >= 100) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-            const lastSection = sections[sections.length - 1];
-            if (lastSection) {
-                currentSectionId = lastSection.getAttribute('id');
-            }
-        }
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (currentSectionId && currentSectionId !== 'contact') {
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
+            const id = section.getAttribute('id');
+            const hasNavLink = document.querySelector(`nav a[href="#${id}"]`);
+            if (hasNavLink) {
+                const rect = section.getBoundingClientRect();
+                // A section is active if its top is in the upper half of viewport and bottom is below header
+                if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= 100) {
+                    currentSectionId = id;
                 }
             }
         });
+
+        // Fallback for very bottom of the page
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const id = sections[i].getAttribute('id');
+                if (document.querySelector(`nav a[href="#${id}"]`)) {
+                    currentSectionId = id;
+                    break;
+                }
+            }
+        }
+
+        if (currentSectionId) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
     }
 
     window.addEventListener('scroll', updateActiveNav);

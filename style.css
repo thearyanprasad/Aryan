@@ -1457,8 +1457,11 @@ body.dark-mode .stat-card {
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        padding: 7rem 2rem 3rem 2rem;
+        overflow-y: auto;
         visibility: hidden;
         transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
         z-index: 99;
@@ -1502,6 +1505,11 @@ body.dark-mode .stat-card {
 
     .large-text {
         font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+        margin-bottom: 2.5rem;
     }
 }
 
@@ -1619,6 +1627,11 @@ body.dark-mode .stat-card {
         height: 65vh;
         max-height: calc(100dvh - 120px);
         bottom: -2vh;
+    }
+
+    .section-title {
+        font-size: 2.3rem;
+        margin-bottom: 2rem;
     }
 }
 
@@ -2508,5 +2521,23 @@ body.dark-mode .topic-chip.active {
     }
     .company-logo-text {
         font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .logos-list {
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    .logo-divider {
+        display: none;
+    }
+    .company-logo-text {
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+    }
+    .logos-title {
+        text-align: center;
     }
 }
