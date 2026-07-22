@@ -1,30 +1,30 @@
 :root {
-    --primary-color: #f8fafc;
+    --primary-color: #0f172a;
     --accent-color: #F97316;
     --accent-rgb: 249, 115, 22;
-    --bg-color: #030303;
-    --text-color: #f8fafc;
-    --text-color-light: #94a3b8;
-    --text-color-medium: #cbd5e1;
-    --gradient-center: rgba(249, 115, 22, 0.1);
-    --gradient-secondary: rgba(249, 115, 22, 0.04);
-    --nav-color: #94a3b8;
-    --bg-overlay: rgba(3, 3, 3, 0.85);
-    --card-bg: rgba(15, 15, 25, 0.55);
-    --card-hover-bg: rgba(22, 22, 38, 0.75);
+    --bg-color: #f8fafc;
+    --text-color: #0f172a;
+    --text-color-light: #64748b;
+    --text-color-medium: #334155;
+    --gradient-center: rgba(249, 115, 22, 0.08);
+    --gradient-secondary: rgba(249, 115, 22, 0.03);
+    --nav-color: #64748b;
+    --bg-overlay: rgba(248, 250, 252, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-hover-bg: rgba(255, 255, 255, 0.95);
     --border-color: rgba(249, 115, 22, 0.12);
     --border-focus: #F97316;
-    --badge-bg: rgba(15, 15, 25, 0.85);
-    --fade-bottom: linear-gradient(to bottom, rgba(3, 3, 3, 0) 0%, #030303 95%);
-    --bg-text-color: #ffffff;
+    --badge-bg: rgba(255, 255, 255, 0.85);
+    --fade-bottom: linear-gradient(to bottom, rgba(248, 250, 252, 0) 0%, #f8fafc 95%);
+    --bg-text-color: #0f172a;
     --bg-text-opacity: 0.015;
-    --btn-text: #030303;
-    --placeholder-bg: rgba(255, 255, 255, 0.03);
-    --placeholder-hover: rgba(255, 255, 255, 0.06);
+    --btn-text: #ffffff;
+    --placeholder-bg: rgba(15, 23, 42, 0.03);
+    --placeholder-hover: rgba(15, 23, 42, 0.06);
 
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.7);
+    --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+    --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.08);
 
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Inter', sans-serif;
@@ -1686,9 +1686,11 @@ body.dark-mode .stat-card {
     .project-card.featured {
         padding: 3rem 2.5rem;
     }
+
     .project-card.featured .project-img-wrapper {
         width: 50%;
     }
+
     .project-card.featured .project-info {
         width: 50%;
         padding-left: 2.5rem;
@@ -2578,5 +2580,676 @@ body.dark-mode .topic-chip.active {
 
     .logos-title {
         text-align: center;
+    }
+}
+
+/* ==========================================================================
+   CASE STUDY MODAL & ENHANCEMENTS (VERSION 2)
+   ========================================================================== */
+
+/* View Case Study Button on Cards */
+.cs-open-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    color: var(--text-color);
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cs-open-btn:hover {
+    background: var(--accent-gradient);
+    color: #030303;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+}
+
+/* Modal Overlay & Backdrop */
+.cs-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background-color: rgba(3, 3, 3, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.cs-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cs-modal-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    height: 90vh;
+    max-height: 900px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.96) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-modal-backdrop.active .cs-modal-wrapper {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Header Bar */
+.cs-modal-header-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(15, 15, 25, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+body:not(.dark-mode) .cs-modal-header-bar {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.cs-progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.cs-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-gradient);
+    transition: width 0.1s linear;
+}
+
+.cs-modal-top-nav {
+    padding: 1rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.cs-modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    overflow: hidden;
+}
+
+.cs-modal-badge {
+    background: rgba(249, 115, 22, 0.15);
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.cs-modal-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cs-modal-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.cs-read-time {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-color-light);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem 0.85rem;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    white-space: nowrap;
+}
+
+.cs-nav-btn {
+    padding: 0.45rem 1rem !important;
+    font-size: 0.82rem !important;
+}
+
+.cs-modal-close-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cs-modal-close-btn:hover {
+    background: rgba(249, 115, 22, 0.2);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+/* Sticky Table of Contents Navigation */
+.cs-toc-nav {
+    padding: 0.6rem 1.75rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cs-toc-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.cs-toc-pill {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-color-light);
+    padding: 0.35rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cs-toc-pill:hover {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cs-toc-pill.active {
+    background: rgba(249, 115, 22, 0.15);
+    color: var(--accent-color);
+    border-color: var(--border-color);
+    font-weight: 600;
+}
+
+/* Modal Body */
+.cs-modal-body {
+    padding: 2.2rem 2.2rem 4rem 2.2rem;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    flex: 1;
+}
+
+/* Case Study Hero Screenshot Header */
+.cs-hero-preview {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2.5rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.cs-hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Case Study Sections */
+.cs-section {
+    margin-bottom: 2.5rem;
+    scroll-margin-top: 140px;
+    padding: 1.8rem;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.cs-section:hover {
+    border-color: rgba(249, 115, 22, 0.3);
+}
+
+.cs-sec-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.cs-sec-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(249, 115, 22, 0.15);
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.cs-sec-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.cs-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-color-medium);
+    margin-bottom: 1rem;
+}
+
+/* Grids & Cards */
+.cs-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+
+.cs-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.cs-card {
+    background: rgba(15, 15, 25, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+body:not(.dark-mode) .cs-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.cs-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cs-card-title svg {
+    color: var(--accent-color);
+}
+
+/* Question List */
+.cs-q-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cs-q-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem;
+    background: rgba(249, 115, 22, 0.04);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Dataset Stats Badge Grid */
+.cs-dataset-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.cs-metric-badge {
+    background: rgba(15, 15, 25, 0.7);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.cs-metric-val {
+    font-size: 1.6rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.03em;
+    color: var(--accent-color);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+}
+
+.cs-metric-lbl {
+    font-size: 0.78rem;
+    color: var(--text-color-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* Analysis Journey Timeline */
+.cs-journey-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: relative;
+    margin-top: 1.25rem;
+}
+
+.cs-journey-step {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    position: relative;
+}
+
+.cs-journey-step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: #030303;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cs-journey-step-info h4 {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 0.2rem;
+}
+
+.cs-journey-step-info p {
+    font-size: 0.86rem;
+    color: var(--text-color-light);
+    line-height: 1.5;
+}
+
+/* Accordions & Expanders */
+.cs-accordion {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    background: rgba(15, 15, 25, 0.4);
+    transition: border-color 0.25s ease;
+}
+
+.cs-accordion.open {
+    border-color: var(--accent-color);
+}
+
+.cs-accordion-header {
+    width: 100%;
+    background: transparent;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.cs-accordion-header:hover {
+    background: rgba(249, 115, 22, 0.05);
+}
+
+.cs-accordion-icon {
+    transition: transform 0.3s ease;
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+.cs-accordion.open .cs-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.cs-accordion-content {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    display: none;
+    color: var(--text-color-medium);
+    line-height: 1.65;
+    font-size: 0.92rem;
+}
+
+.cs-accordion.open .cs-accordion-content {
+    display: block;
+    animation: csFadeIn 0.3s ease;
+}
+
+@keyframes csFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Key Insights 4-Vector Breakdown Cards */
+.cs-insight-card {
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.cs-insight-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.cs-insight-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-color);
+    background: rgba(249, 115, 22, 0.12);
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+}
+
+.cs-insight-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.cs-vector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.cs-vector-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 2px solid var(--accent-color);
+    padding: 0.75rem 0.9rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.cs-vector-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.cs-vector-desc {
+    font-size: 0.88rem;
+    color: var(--text-color-medium);
+    line-height: 1.5;
+}
+
+/* Recommendations Action Cards */
+.cs-rec-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    padding: 1.2rem;
+    background: rgba(249, 115, 22, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    margin-bottom: 0.85rem;
+}
+
+.cs-rec-icon {
+    background: rgba(249, 115, 22, 0.15);
+    color: var(--accent-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cs-rec-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.35rem;
+}
+
+.cs-rec-content p {
+    font-size: 0.9rem;
+    color: var(--text-color-medium);
+    line-height: 1.6;
+}
+
+/* Interview Q&A Cards */
+.cs-qa-card {
+    background: rgba(15, 15, 25, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 0.85rem;
+    overflow: hidden;
+}
+
+.cs-qa-question {
+    width: 100%;
+    background: transparent;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.cs-qa-answer {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    display: none;
+    color: var(--text-color-medium);
+    line-height: 1.65;
+    font-size: 0.91rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+}
+
+.cs-qa-card.open .cs-qa-answer {
+    display: block;
+    animation: csFadeIn 0.3s ease;
+}
+
+.cs-qa-card.open .cs-accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Responsive Modal Styling */
+@media (max-width: 768px) {
+    .cs-modal-backdrop {
+        padding: 0.5rem;
+    }
+
+    .cs-modal-wrapper {
+        height: 96vh;
+        border-radius: 16px;
+    }
+
+    .cs-modal-top-nav {
+        padding: 0.85rem 1rem;
+    }
+
+    .cs-modal-title {
+        font-size: 1.1rem;
+    }
+
+    .cs-modal-body {
+        padding: 1.25rem 1rem 3rem 1rem;
+    }
+
+    .cs-section {
+        padding: 1.25rem;
+    }
+
+    .cs-vector-grid {
+        grid-template-columns: 1fr;
     }
 }
