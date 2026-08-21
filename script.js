@@ -1,6 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Custom Cursor
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        smoothTouch: false, // native on mobile
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+    });
+
+    // Update Lenis on requestAnimationFrame
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Custom Cursor Upgrade
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
 
@@ -9,13 +28,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let posX = 0, posY = 0;
         let mouseX = 0, mouseY = 0;
+        
+        // Dynamic hover check utility
+        const checkHover = (element) => {
+            if (!element) return;
+            
+            const isHoverTarget = element.closest('a, button, input, textarea, .availability-badge, .skill-item, .stat-card, .topic-chip, .cs-toc-pill, .reset-form-btn, .copy-email-btn');
+            const isTextTarget = element.closest('p, h1, h2, h3, span, li, td, th, label') && 
+                                 !element.closest('a, button, .skill-item, .stat-card, .theme-toggle, .menu-toggle, .topic-chip, .cs-toc-pill, .reset-form-btn, .copy-email-btn, .availability-badge');
+            
+            if (isHoverTarget) {
+                document.body.classList.add('cursor-hover');
+            } else {
+                document.body.classList.remove('cursor-hover');
+            }
+            
+            if (isTextTarget) {
+                document.body.classList.add('cursor-text');
+            } else {
+                document.body.classList.remove('cursor-text');
+            }
+        };
 
         const updateCursor = () => {
-            posX += (mouseX - posX) * 0.08;
-            posY += (mouseY - posY) * 0.08;
+            // Lerping for follower cursor position
+            posX += (mouseX - posX) * 0.12;
+            posY += (mouseY - posY) * 0.12;
 
-            follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+            // Calculate movement velocity
+            const dx = mouseX - posX;
+            const dy = mouseY - posY;
+            const speed = Math.sqrt(dx * dx + dy * dy);
+            
+            // Squash and stretch parameters based on speed
+            const maxSquish = 0.35;
+            const squish = Math.min(speed / 120, maxSquish);
+            const scaleX = 1 + squish;
+            const scaleY = 1 - squish;
+            
+            // Calculate travel angle
+            const angle = Math.atan2(dy, dx);
+            
+            // Apply 3D transforms for high performance GPU rendering
             cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            
+            // Only rotate and squish if we are moving significantly
+            if (speed > 1) {
+                follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) rotate(${angle}rad) scale(${scaleX}, ${scaleY})`;
+            } else {
+                follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(1)`;
+            }
 
             requestAnimationFrame(updateCursor);
         };
@@ -31,26 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 firstMove = false;
                 updateCursor();
             }
+            
+            checkHover(e.target);
         });
 
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('a, button, input, textarea, .availability-badge, .skill-item, .stat-card')) {
-                document.body.classList.add('cursor-hover');
-            }
-            if (e.target.closest('p, h1, h2, h3, span, li, td, th') && !e.target.closest('a, button, .skill-item, .stat-card, .theme-toggle, .menu-toggle')) {
-                document.body.classList.add('cursor-text');
-            }
-        });
+        // Re-check hover element on scroll (resolves hover lock during keyboard scrolling)
+        window.addEventListener('scroll', () => {
+            const el = document.elementFromPoint(mouseX, mouseY);
+            checkHover(el);
+        }, { passive: true });
 
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('a, button, input, textarea, .availability-badge, .skill-item, .stat-card')) {
-                document.body.classList.remove('cursor-hover');
-            }
-            if (e.target.closest('p, h1, h2, h3, span, li, td, th')) {
-                document.body.classList.remove('cursor-text');
-            }
-        });
-
+        // Mouse Down / Up click physics
         document.addEventListener('mousedown', () => {
             document.body.classList.add('cursor-active');
         });
@@ -80,19 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 
-    // Smooth scroll for nav links
+    // Smooth scroll for nav links using Lenis
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            lenis.scrollTo(targetId, {
+                offset: 0,
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
         });
     });
 
@@ -158,7 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggleBtn.addEventListener('click', () => {
             menuToggleBtn.classList.toggle('active');
             navMenu.classList.toggle('open');
-            document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+            if (navMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+                lenis.stop();
+            } else {
+                document.body.style.overflow = '';
+                lenis.start();
+            }
         });
 
         const navMenuLinks = navMenu.querySelectorAll('a');
@@ -167,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuToggleBtn.classList.remove('active');
                 navMenu.classList.remove('open');
                 document.body.style.overflow = '';
+                lenis.start();
             });
         });
     }
@@ -327,8 +386,8 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Featured Platform',
             title: 'AI Venture Intelligence Platform',
             readTime: '⏱️ 5 min read',
-            demoUrl: 'https://github.com/thearyanprasad',
-            sourceUrl: 'https://github.com/thearyanprasad',
+            demoUrl: 'https://github.com/thearyanprasad/AI-Venture-Intelligence-Platform',
+            sourceUrl: 'https://github.com/thearyanprasad/AI-Venture-Intelligence-Platform',
             heroImg: 'ai_venture_platform.png',
             problem: {
                 desc: 'Venture capital partners and investment managers lacked a unified analytical platform to monitor global AI startup activity, track funding rounds across emerging sub-sectors, evaluate valuation growth velocity, and identify high-potential venture opportunities before competitive bidding cycles.',
@@ -509,8 +568,8 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Power BI Dashboard',
             title: 'LV Analytics Dashboard',
             readTime: '⏱️ 4 min read',
-            demoUrl: 'https://github.com/thearyanprasad',
-            sourceUrl: 'https://github.com/thearyanprasad',
+            demoUrl: 'https://github.com/thearyanprasad/LV-Analytics-Dashboard',
+            sourceUrl: 'https://github.com/thearyanprasad/LV-Analytics-Dashboard',
             heroImg: 'lv_dashboard.png',
             problem: {
                 desc: 'Operations executives and store network directors lacked centralized visibility into retail product performance, store-level operational margins, inventory throughput, and regional supply fulfillment bottlenecks.',
@@ -782,8 +841,8 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'AI Assistant',
             title: 'Lumis AI (Work in Progress)',
             readTime: '⏱️ 4 min read',
-            demoUrl: 'https://github.com/thearyanprasad',
-            sourceUrl: 'https://github.com/thearyanprasad',
+            demoUrl: 'https://github.com/thearyanprasad/Lumis-AI',
+            sourceUrl: 'https://github.com/thearyanprasad/Lumis-AI',
             heroImg: 'lumis_ai.png',
             problem: {
                 desc: 'Non-technical business executives and operational managers struggle to extract immediate analytical insights from SQL databases and CSV reports without waiting for dedicated analyst teams to write queries.',
@@ -1186,6 +1245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalBackdrop.classList.add('active');
         modalBackdrop.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        lenis.stop();
         history.pushState(null, null, `#case-study-${key}`);
     }
 
@@ -1193,6 +1253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalBackdrop.classList.remove('active');
         modalBackdrop.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        lenis.start();
         if (window.location.hash.startsWith('#case-study-')) {
             history.pushState(null, null, ' ');
         }
@@ -1288,5 +1349,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     checkHashLink();
     window.addEventListener('hashchange', checkHashLink);
+
+    // ==========================================================================
+    // SMOOTHNESS ENHANCEMENT HELPERS
+    // ==========================================================================
+
+    // Automated Stagger Reveal Delays
+    const staggers = document.querySelectorAll('[data-stagger]');
+    staggers.forEach(parent => {
+        const reveals = parent.querySelectorAll('.reveal');
+        reveals.forEach((child, index) => {
+            child.style.setProperty('--delay', `${index * 0.12}s`);
+        });
+    });
+
+    // Magnetic Physics CTA buttons
+    const makeMagnetic = (el) => {
+        if (!el) return;
+
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const x = e.clientX - centerX;
+            const y = e.clientY - centerY;
+            
+            const pull = 0.32;
+            
+            el.classList.add('magnetic-hovering');
+            el.style.transform = `translate3d(${x * pull}px, ${y * pull}px, 0)`;
+            
+            const inner = el.querySelector('span, svg, img');
+            if (inner) {
+                inner.style.transform = `translate3d(${x * pull * 0.3}px, ${y * pull * 0.3}px, 0)`;
+            }
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            el.classList.remove('magnetic-hovering');
+            el.style.transform = 'translate3d(0, 0, 0)';
+            
+            const inner = el.querySelector('span, svg, img');
+            if (inner) {
+                inner.style.transform = 'translate3d(0, 0, 0)';
+            }
+        });
+    };
+
+    document.querySelectorAll('.contact-btn, .resume-btn-hero, .theme-toggle, .logo, .menu-toggle').forEach(makeMagnetic);
 });
 
