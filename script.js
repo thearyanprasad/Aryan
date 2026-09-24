@@ -1,23 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Initialize Lenis smooth scroll
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        smoothTouch: false, // native on mobile
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
-    });
+    // Initialize Lenis smooth scroll safely
+    let lenis = null;
+    if (typeof Lenis !== 'undefined') {
+        try {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                smoothTouch: false, // native on mobile
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+            });
 
-    // Update Lenis on requestAnimationFrame
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+            // Update Lenis on requestAnimationFrame
+            function raf(time) {
+                if (lenis) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+            }
+            requestAnimationFrame(raf);
+        } catch (err) {
+            console.warn('Lenis smooth scroll failed to initialize:', err);
+            lenis = null;
+        }
     }
-    requestAnimationFrame(raf);
 
     // Custom Cursor Upgrade
     const cursor = document.querySelector('.cursor');
@@ -133,18 +143,29 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 
-    // Smooth scroll for nav links using Lenis
+    // Smooth scroll for nav links using Lenis with fallback
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (!targetId || targetId === '#' || targetId.startsWith('#case-study-')) return;
 
-            lenis.scrollTo(targetId, {
-                offset: 0,
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-            });
+            try {
+                const targetEl = document.querySelector(targetId);
+                if (!targetEl) return;
+
+                e.preventDefault();
+                if (lenis) {
+                    lenis.scrollTo(targetEl, {
+                        offset: 0,
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                    });
+                } else {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (err) {
+                // Ignore invalid selector queries
+            }
         });
     });
 
@@ -212,10 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('open');
             if (navMenu.classList.contains('open')) {
                 document.body.style.overflow = 'hidden';
-                lenis.stop();
+                lenis?.stop();
             } else {
                 document.body.style.overflow = '';
-                lenis.start();
+                lenis?.start();
             }
         });
 
@@ -225,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuToggleBtn.classList.remove('active');
                 navMenu.classList.remove('open');
                 document.body.style.overflow = '';
-                lenis.start();
+                lenis?.start();
             });
         });
     }
@@ -1245,7 +1266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalBackdrop.classList.add('active');
         modalBackdrop.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        lenis.stop();
+        lenis?.stop();
         history.pushState(null, null, `#case-study-${key}`);
     }
 
@@ -1253,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalBackdrop.classList.remove('active');
         modalBackdrop.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        lenis.start();
+        lenis?.start();
         if (window.location.hash.startsWith('#case-study-')) {
             history.pushState(null, null, ' ');
         }
@@ -1330,7 +1351,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = pill.getAttribute('data-target');
             const targetSec = modalBody.querySelector(`#${targetId}`);
             if (targetSec) {
-                targetSec.scrollIntoView({ behavior: 'smooth' });
+                modalBody.scrollTo({
+                    top: targetSec.offsetTop - 15,
+                    behavior: 'smooth'
+                });
                 tocPills.forEach(p => p.classList.remove('active'));
                 pill.classList.add('active');
             }
